@@ -1,64 +1,89 @@
 import React from 'react';
 
-const API = "https://api-project-269146618053.appspot.com"
-const ENDPOINTS  = {
-  LOGIN: "/iems/login"
+class Apicon {
+  constructor() {
+    this.APIURL = "https://api-project-269146618053.appspot.com";
+    this.APIENDPOINTS  = {
+      LOGIN: "/iems/login"
+    }
+
+    this.loggedIn = false;
+    this.userId = "";
+
+    this.status = "idle";
+  }
+
+  login = (callback) => {
+    let loginform = new FormData(document.getElementById("loginform"));
+
+    let request = new XMLHttpRequest();
+    request.onload = function(req) {
+      let resj = JSON.parse(req.responseText)
+      if (req.status == 200) {
+        if (resj.result === "Success") {
+          this.loggedIn = true;
+          this.status = "success"
+        }
+      } else if(req.status == 401){
+        if (resj.result == "Login Not Found") {
+          this.loggedIn = false;
+          this.status = "notAuthorized"
+        }
+      }
+      callback(this);
+    }
+    request.onload = request.onload.bind(this, request);
+    request.open("POST", this.APIURL+this.APIENDPOINTS.LOGIN);
+    request.send(loginform);
+  };
 }
-const ORIGIN = "http://localhost:3000/"
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.apicon = props.apicon;
     this.state = {
       loggedIn: false,
       status: "idle",
-      //reason: "idle"
-      userid: -1
+      usernameStatus: "idle",
+      usernameError: "",
+      passwordStatus: "idle",
+      passwordError: ""
     }
   }
 
   login = () => {
-    // let username = document.getElementById("username").value;
-    // let password = document.getElementById("password").value;
+    let usernameField = document.getElementById("username");
+    let passwordField = document.getElementById("password");
 
-    let loginform = new FormData(document.getElementById("loginform"));
+    let newState = {status: 'idle'};
 
-    // for (let x of loginform.keys()){console.log(x);}
-
-    // let loginform = new FormData()
-    // loginform.append("username", username)
-    // loginform.append("password", password)
-
-    let request = new XMLHttpRequest();
-    // console.log(this);
-    request.onload = function(req) {
-      // console.log(req);
-      // let resj = {}
-      // console.log(this)
-      let resj = JSON.parse(req.responseText)
-      if (req.status == 200) {
-        if (resj.result === "Success") {
-          this.setState({
-            loggedIn: true,
-            userid: resj.workerid,
-            status: "success"
-          })
-        }
-      } else if(req.status == 401){
-        if (resj.result == "Login Not Found") {
-          this.setState({
-          loggedIn: false,
-          status: "notFound"
-        })
-      }
+    if (usernameField.value.length == 0) {
+      newState.usernameStatus = "error";
+      newState.status = "invalidFields";
+      newState.usernameError = "Username cannot be blank";
+    } else {
+      newState.usernameStatus = "idle";
+      newState.usernameError = "";
     }
+
+    if (passwordField.value.length == 0) {
+      newState.passwordStatus = "error";
+      newState.status = "invalidFields";
+      newState.passwordError = "Username cannot be blank";
+    } else {
+      newState.passwordStatus = "idle";
+      newState.passwordError = "";
+    }
+
+    if (newState.status == 'idle') {
+      this.apicon.login(() => {
+        console.log(this.apicon.status);
+      });
+    }
+
+    this.setState(newState);
   }
-    request.onload = request.onload.bind(this, request);
-    request.open("POST", API+ENDPOINTS.LOGIN);
-    //request.setRequestHeader("Access-Control-Request-Method", "POST");
-    //request.setRequestHeader("Access-Control-Allow-Origin", ORIGIN);
-    request.send(loginform);
-  };
 
   render = () => {
     return (
@@ -72,11 +97,13 @@ class Login extends React.Component {
           <div className="card-body">
             <form id="loginform" action="/login">
               <div className="group">
-                <input type="text" id="username" name="username" placeholder='Username' className={'input ' + (this.state.status == 'notFound' ?'danger' : '') } />
+                <input type="text" id="username" name="username" placeholder='Username' className={'input ' + (this.state.usernameStatus == 'error' ?'danger' : '') } />
+                {this.state.usernameStatus == 'error'? <label htmlFor="username" className="danger">{this.state.usernameError}</label> : ""}
               </div>
 
               <div className="group">
-                <input type="password" id="password" name="password" placeholder='Password' className={'input ' + (this.state.status == 'notFound' ?'danger' : '') } />
+                <input type="password" id="password" name="password" placeholder='Password' className={'input ' + (this.state.passwordStatus == 'error' ?'danger' : '') } />
+                {this.state.passwordStatus == 'error'? <label htmlFor="password" className="danger">{this.state.passwordError}</label> : ""}
               </div>
 
               <div className="group">
@@ -101,4 +128,6 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+
+// export default Apicon;
+export {Login, Apicon};

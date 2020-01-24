@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Login from './login.js';
+import {Login, Apicon} from './login.js';
 import Schedule from './schedule.js';
+
+let apicon = new Apicon();
 
 function Home(props) {
   return (
-    <Login />
+    <Login apicon={apicon}/>
     //<Schedule userid='0'/>
 );
 }
