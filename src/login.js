@@ -7,8 +7,14 @@ class Apicon {
       LOGIN: "/iems/login"
     }
 
-    this.loggedIn = false;
-    this.userId = "";
+    if (localStorage.getItem("userId")) {
+      this.loggedIn = true;
+      this.userId = localStorage.getItem("userId");
+    } else {
+      this.loggedIn = false;
+      this.userId = "";
+    }
+
 
     this.status = "idle";
   }
@@ -22,7 +28,9 @@ class Apicon {
       if (req.status == 200) {
         if (resj.result === "Success") {
           this.loggedIn = true;
-          this.status = "success"
+          this.status = "success";
+          this.userId = resj.workerId;
+          localStorage.setItem("userId", this.userId);
         }
       } else if(req.status == 401){
         if (resj.result == "Login Not Found") {
