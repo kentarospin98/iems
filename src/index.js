@@ -11,8 +11,10 @@ let apicon = new Apicon();
 function Home(props) {
   return (
     <BrowserRouter>
-      { !apicon.loggedIn ? <Redirect to="/login" /> : ""}
       <Route path="/login" render={ ()  => <Login apicon={apicon} /> } />
+      <Route path="/schedule" render={ ()  => <Schedule apicon={apicon} /> } />
+      <Redirect path="/" to="/schedule" />
+      { !apicon.loggedIn ? <Redirect to="/login" /> : <div></div> }
     </BrowserRouter>
     //<Schedule userid='0'/>
 );

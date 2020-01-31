@@ -1,10 +1,12 @@
 import React from 'react';
+import { withRouter } from "react-router";
 
 class Apicon {
   constructor() {
     this.APIURL = "https://api-project-269146618053.appspot.com";
     this.APIENDPOINTS  = {
-      LOGIN: "/iems/login"
+      LOGIN: "/iems/login",
+      TASKS: "/iems/tasks"
     }
 
     if (localStorage.getItem("userId")) {
@@ -44,6 +46,25 @@ class Apicon {
     request.open("POST", this.APIURL+this.APIENDPOINTS.LOGIN);
     request.send(loginform);
   };
+
+  getTasks = (callback) => {
+    let request = new XMLHttpRequest();
+    let form = new FormData()
+    form.append("workerId", this.userId);
+
+    request.onload = function(req) {
+      if (req.status == 200) {
+        let tasks = JSON.parse(req.responseText);
+        callback("success", tasks);
+      } else {
+        callback("fail", null)
+      }
+    }
+    request.onload = request.onload.bind(this, request);
+    request.open("POST", this.APIURL+this.APIENDPOINTS.TASKS);
+    request.send(form);
+  }
+
 }
 
 class Login extends React.Component {
@@ -85,9 +106,13 @@ class Login extends React.Component {
     }
 
     if (newState.status == 'idle') {
-      this.apicon.login(() => {
+      this.apicon.login(function() {
         console.log(this.apicon.status);
-      });
+        if (this.apicon.status === "success") {
+          // console.log(this);
+          this.props.history.push("/schedule")
+        }
+      }.bind(this));
     }
 
     this.setState(newState);
@@ -138,4 +163,7 @@ class Login extends React.Component {
 }
 
 // export default Apicon;
-export {Login, Apicon};
+const LoginWithRouter = withRouter(Login)
+
+export {LoginWithRouter as Login, Apicon};
+// export {Login, Apicon};
