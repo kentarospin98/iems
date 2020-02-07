@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 
 class Apicon {
   constructor() {
+    // Postman collection
+    // https://www.getpostman.com/collections/1c471f5f62c8faa6df80
     this.APIURL = "https://api-project-269146618053.appspot.com";
     this.APIENDPOINTS  = {
       LOGIN: "/iems/login",

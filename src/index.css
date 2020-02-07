@@ -10,3 +10,8 @@
   font-size: 1.3em;
   /* border-bottom: solid 1px; */
 }
+
+.navigator {
+  position: sticky;
+  bottom: 0px;
+}

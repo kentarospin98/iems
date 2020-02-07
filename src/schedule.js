@@ -3,6 +3,8 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCompass, faClock, faHourglass } from '@fortawesome/free-solid-svg-icons'
 
+import Navbar from './navbar.js'
+
 class Task extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +50,7 @@ class Schedule extends React.Component {
       taskPanels.push(<Task key={i} task={this.state.tasks[i]} />)
     }
     return (
+      <div>
       <div className="schedule-page flex-center col-max pb-max pt-4 bg-light">
       <div className="mx-auto col-md-8 col-sm-10 col-12">
       <div className="card shadow-1 overflow-unset px-4 w-100">
@@ -58,6 +61,8 @@ class Schedule extends React.Component {
       </div>
       {taskPanels}
       </div>
+      </div>
+      <Navbar current="schedule"/>
       </div>
     )
   }
