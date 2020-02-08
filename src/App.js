@@ -4,10 +4,10 @@ import './butterCake.css';
 
 import Home from './index.js';
 
-function App() {
+function App(props) {
   return (
     <div className="App" >
-    <Home />
+    <Home props={props}/>
     </div>
   );
 }

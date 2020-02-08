@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import React from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,6 +14,7 @@ class Task extends React.Component {
 
   render = () => {
     return (
+      <Link to={{pathname: "/task", query: {task: this.task}}}>
       <div className="card m-1 p-1">
         <div className="card-title task-title p-1">{this.task.task_name}</div>
         <div className="card-body">
@@ -21,6 +23,7 @@ class Task extends React.Component {
           <div><FontAwesomeIcon icon={faHourglass} /><span className="p-1">Due at {(new Date(this.task.due_at)).toLocaleString('en-US')}</span></div>
         </div>
       </div>
+      </Link>
     )
   }
 }
