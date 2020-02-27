@@ -8,7 +8,8 @@ class Apicon {
     this.APIURL = "https://api-project-269146618053.appspot.com";
     this.APIENDPOINTS  = {
       LOGIN: "/iems/login",
-      TASKS: "/iems/tasks"
+      TASKS: "/iems/tasks",
+      TASKDETAIL: "/iems/tasksdetail"
     }
 
     if (localStorage.getItem("userId")) {
@@ -26,7 +27,7 @@ class Apicon {
   login = (callback) => {
     let loginform = new FormData(document.getElementById("loginform"));
 
-    let request = new XMLHttpRequest();
+    let request = new XMLHttpRequest("POST");
     request.onload = function(req) {
       let resj = JSON.parse(req.responseText)
       if (req.status == 200) {
@@ -50,7 +51,7 @@ class Apicon {
   };
 
   getTasks = (callback) => {
-    let request = new XMLHttpRequest();
+    let request = new XMLHttpRequest("POST");
     let form = new FormData()
     form.append("workerId", this.userId);
 
@@ -67,6 +68,24 @@ class Apicon {
     request.send(form);
   }
 
+  getTaskdetails = (callback, taskId) => {
+    let request = new XMLHttpRequest("POST");
+    let form = new FormData()
+    form.append("workerId", this.userId);
+    form.append("taskId", taskId);
+
+    request.onload = function(req) {
+      if (req.status == 200) {
+        let taskdetails = JSON.parse(req.responseText);
+        callback("success", taskdetails);
+      } else {
+        callback("fail", null)
+      }
+    }
+    request.onload = request.onload.bind(this, request);
+    request.open("POST", this.APIURL+this.APIENDPOINTS.TASKDETAIL);
+    request.send(form);
+  }
 }
 
 class Login extends React.Component {
@@ -109,9 +128,7 @@ class Login extends React.Component {
 
     if (newState.status == 'idle') {
       this.apicon.login(function() {
-        console.log(this.apicon.status);
         if (this.apicon.status === "success") {
-          // console.log(this);
           this.props.history.push("/schedule")
         }
       }.bind(this));

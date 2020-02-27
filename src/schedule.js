@@ -40,7 +40,6 @@ class Schedule extends React.Component {
     }
     props.apicon.getTasks(function(status, tasks) {
       if (status == "success") {
-        console.log(tasks);
         localStorage.setItem("tasks", JSON.stringify(tasks));
         this.setState({tasks: tasks})
       }

@@ -13,7 +13,7 @@ function Home(props) {
   return (
     <BrowserRouter>
       <Route path="/login" render={ ()  => <Login apicon={apicon} /> } />
-      <Route path="/task" render={ (props) => <TaskDetails query={props.location.query}/>} />
+      <Route path="/task" render={ (props) => <TaskDetails apicon={apicon} query={props.location.query}/>} />
       <Route path="/schedule" render={ ()  => <Schedule apicon={apicon} /> } />
       <Redirect path="/" to="/schedule" />
       { !apicon.loggedIn ? <Redirect to="/login" /> : <div></div> }
