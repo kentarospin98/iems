@@ -14,7 +14,7 @@ class Task extends React.Component {
 
   render = () => {
     return (
-      <Link to={{pathname: "/task", query: {task: this.task}}}>
+      <Link className="links" to={{pathname: "/task", query: {task: this.task}}}>
       <div className="card m-1 p-1">
         <div className="card-title task-title p-1">{this.task.task_name}</div>
         <div className="card-body">
