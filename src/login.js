@@ -9,7 +9,8 @@ class Apicon {
     this.APIENDPOINTS  = {
       LOGIN: "/iems/login",
       TASKS: "/iems/tasks",
-      TASKDETAIL: "/iems/tasksdetail"
+      TASKDETAIL: "/iems/tasksdetail",
+      TUTORIALS: "/iems/tutorial"
     }
 
     if (localStorage.getItem("userId")) {
@@ -50,6 +51,25 @@ class Apicon {
     request.send(loginform);
   };
 
+  getTutorial = (callback) => {
+    callback("success", {
+      title: "Some Title Here",
+      steps: [
+        {
+          heading: "Step 1",
+          subheading: "optional",
+          text: "This can be <b>HTML</b>",
+          image: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073"
+        },
+        {
+          heading: "Step 2",
+          text: "More text here",
+          image: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073"
+        }
+      ]
+    })
+  }
+
   getTasks = (callback) => {
     let request = new XMLHttpRequest("POST");
     let form = new FormData()
@@ -57,8 +77,8 @@ class Apicon {
 
     request.onload = function(req) {
       if (req.status == 200) {
-        let tasks = JSON.parse(req.responseText);
-        callback("success", tasks);
+        // let tasks = JSON.parse(req.responseText);
+        // callback("success", tasks);
       } else {
         callback("fail", null)
       }
