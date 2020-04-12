@@ -14,7 +14,7 @@ function Home(props) {
   return (
     <BrowserRouter>
       <Route path="/login" render={ ()  => <Login apicon={apicon} /> } />
-      <Route path="/tutorial/:id" render={ (props)  => <Tutorial id={props} apicon={apicon} /> } />
+      <Route path="/tutorial/:id" render={ (props)  => <Tutorial id={props.match.params.id} apicon={apicon} /> } />
       <Route path="/task" render={ (props) => <TaskDetails apicon={apicon} query={props.location.query}/>} />
       <Route path="/schedule" render={ ()  => <Schedule apicon={apicon} /> } />
       <Route exact path="/" render={() => (
