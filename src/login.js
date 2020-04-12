@@ -77,8 +77,8 @@ class Apicon {
 
     request.onload = function(req) {
       if (req.status == 200) {
-        // let tasks = JSON.parse(req.responseText);
-        // callback("success", tasks);
+        let tasks = JSON.parse(req.responseText);
+        callback("success", tasks);
       } else {
         callback("fail", null)
       }
