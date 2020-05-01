@@ -23,3 +23,7 @@
 .links {
   color: inherit;
 }
+
+.links:hover {
+  color: inherit;
+}

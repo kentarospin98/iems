@@ -51,6 +51,28 @@ class Apicon {
     request.send(loginform);
   };
 
+  getTutorialList = (callback) => {
+    callback("success",
+    {
+      page: 0,
+      tutorials: [
+        {
+          title: "Tutorial 1",
+          cover: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073",
+          desc: "Description of the Tutorial",
+          id: 1
+        },
+        {
+          title: "Tutorial 2",
+          cover: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073",
+          desc: "Description of the second Tutorial",
+          id: 2
+        }
+      ]
+    }
+  )
+  }
+
   getTutorial = (callback) => {
     callback("success", {
       title: "Some Title Here",
@@ -67,7 +89,7 @@ class Apicon {
           image: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073"
         }
       ]
-    })
+    });
   }
 
   getTasks = (callback) => {
