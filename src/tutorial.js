@@ -20,7 +20,7 @@ class Panel extends React.Component {
           <img src={this.step.image} class="img-cover img-rounded shadow" />
         </div>
         <div className="card-body">
-          <div className="h1">{this.step.heading}</div>
+          <div className="h2">{this.step.heading}</div>
           <div className="h4">{this.step.subheading}</div>
           <div className="p">{this.step.text}</div>
         </div>

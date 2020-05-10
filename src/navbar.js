@@ -24,7 +24,7 @@ class Navbar extends React.Component {
               <div className="menu-box" id="mainNav1">
                   <div className="menu-close"></div>
                   <ul className="menu ml-auto">
-                      <li className=""><a href="#!"><FontAwesomeIcon icon={faChartLine} /> Dashboard</a></li>
+                      <li className=""><a href="/tutoriallist"><FontAwesomeIcon icon={faChartLine} /> Tutorials</a></li>
                   </ul>
               </div>
               <div className="menu-box" id="mainNav1">

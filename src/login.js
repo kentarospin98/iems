@@ -59,9 +59,9 @@ class Apicon {
       page: 0,
       tutorials: [
         {
-          title: "Tutorial 1",
-          cover: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073",
-          desc: "Description of the Tutorial",
+          title: "How to Fix a Chip in a Quartz Countertop",
+          cover: "https://www.wikihow.com/images/thumb/8/84/Fix-a-Chip-in-a-Quartz-Countertop-Step-13.jpg/-crop-250-145-193px-Fix-a-Chip-in-a-Quartz-Countertop-Step-13.jpg",
+          desc: "Quartz countertops are well known for being a sturdy and fuss-free option for kitchens. Made with a blend of stone and resin, quartz is a hard material like granite but also has an aesthetically pleasing glossy and non-porous surface. In spite of being tough, quartz countertops are not indestructible and may get chipped or cracked due to kitchen accidents. However, in most cases, you can repair the affected area without having to replace the entire slab. ",
           id: 1
         },
         {
@@ -77,18 +77,33 @@ class Apicon {
 
   getTutorial = (callback) => {
     callback("success", {
-      title: "Some Title Here",
+      title: "How to Fix a Chip in a Quartz Countertop.",
       steps: [
         {
-          heading: "Step 1",
-          subheading: "optional",
-          text: "This cannot be HTML",
-          image: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073"
+          heading: "Clean the counter with an ammonia based cleaner.",
+          text: "Before you get started with the repairs, clean the area with a non-abrasive cleaner. Spray the cleaner and wipe the area with a soft damp cloth. Wait for it to dry before you begin the repairs.",
+          image: "https://www.wikihow.com/images/thumb/1/1b/Fix-a-Chip-in-a-Quartz-Countertop-Step-1.jpg/aid10305477-v4-728px-Fix-a-Chip-in-a-Quartz-Countertop-Step-1.jpg.webp"
         },
         {
-          heading: "Step 2",
-          text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          image: "https://linuxrocks.online/system/accounts/headers/000/016/416/original/data.png?1508866073"
+          heading: "Stick masking tape around the chip for a better finish and to prevent adhesive stains",
+          text: "Cordon off the chipped portion by sticking strips of masking or painter tape around it. This way it is easier to apply the adhesive only on the chipped part giving you a level and clean finish. It will also prevent unnecessary stains and spills from the adhesive on your counter. ",
+          image: "https://www.wikihow.com/images/thumb/9/95/Fix-a-Chip-in-a-Quartz-Countertop-Step-2.jpg/aid10305477-v4-728px-Fix-a-Chip-in-a-Quartz-Countertop-Step-2.jpg.webp"
+        },
+        {
+          heading: "Fix cracks on light coloured countertops with superglue",
+          subheading: "Adhesive filler or super glue is a good option to repair minor chips on lighter coloured surfaces since they are less noticeable.",
+          text: "Use a brush or spatula to apply thin coats of the glue on the affected area until the chip is level with the rest of the surface. Leave the glue to cure for at least 24 hours. Do not apply too much at one go as it going to extend the curing time. Choose superglue with a thin consistency to treat chipped surfaces and a thicker one for chipped edges.",
+          image: "https://www.wikihow.com/images/thumb/b/bd/Fix-a-Chip-in-a-Quartz-Countertop-Step-3.jpg/aid10305477-v4-728px-Fix-a-Chip-in-a-Quartz-Countertop-Step-3.jpg.webp"
+        },
+        {
+          heading: "Use pigmented epoxy adhesive for dark or textured counters.",
+          text: "If your countertop is textured or is dark coloured, opt for a pigmented epoxy instead of superglue. For the best result, you can mix the epoxy with a dye that is in the closest shade to the surface. Apply this mix to the chipped area in the thin coats till it is level with the rest of the countertop. Let it dry for 24 hours.",
+          image: "https://www.wikihow.com/images/thumb/7/75/Fix-a-Chip-in-a-Quartz-Countertop-Step-4.jpg/aid10305477-v4-728px-Fix-a-Chip-in-a-Quartz-Countertop-Step-4.jpg.webp"
+        },
+        {
+          heading: "File the glue patch once it hardens.",
+          text: "Use superfine sandpaper with a higher grit of 360 to 600 to smooth over the patch once it hardens.",
+          image: "https://www.wikihow.com/images/thumb/4/48/Fix-a-Chip-in-a-Quartz-Countertop-Step-5.jpg/aid10305477-v4-728px-Fix-a-Chip-in-a-Quartz-Countertop-Step-5.jpg.webp"
         }
       ]
     });
