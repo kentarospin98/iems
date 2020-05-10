@@ -41,9 +41,17 @@ class Schedule extends React.Component {
     props.apicon.getTasks(function(status, tasks) {
       if (status == "success") {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        this.setState({tasks: tasks})
+        if (this._isMounted) {
+          this.setState({tasks: tasks})
+        } else {
+          this.state.tasks = tasks;
+        }
       }
     }.bind(this));
+  }
+
+  componentWillMount = () => {
+    this._isMounted = true;
   }
 
   render = () => {

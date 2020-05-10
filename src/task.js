@@ -42,10 +42,18 @@ class TaskDetails extends React.Component {
       props.apicon.getTaskdetails(function(status, taskdetails) {
         if (status == "success") {
           localStorage.setItem("taskdetails", JSON.stringify(taskdetails));
-          this.setState({taskdetails: taskdetails})
+          if (this._isMounted) {
+            this.setState({taskdetails: taskdetails})
+          } else {
+            this.state.taskdetails = taskdetails;
+          }
         }
       }.bind(this), props.query.task.task_id);
     }
+  }
+
+  componentWillMount = () => {
+    this._isMounted = true;
   }
 
   render = () => {
@@ -54,7 +62,7 @@ class TaskDetails extends React.Component {
       if (this.state.taskdetails) {
         for (var i = 0; i <  this.state.taskdetails.subTasks.length; i++) {
           // console.log(this.state.taskdetails.subTasks[i]);
-          subtasks.push(<Subtask subtask={this.state.taskdetails.subTasks[i]} />);
+          subtasks.push(<Subtask key={i} subtask={this.state.taskdetails.subTasks[i]} />);
         }
       } else {
         subtasks = "Loading"

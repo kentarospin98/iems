@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from "react-router";
 
+const DEBUG = true;
+
 class Apicon {
   constructor() {
     // Postman collection
@@ -93,40 +95,72 @@ class Apicon {
   }
 
   getTasks = (callback) => {
-    let request = new XMLHttpRequest("POST");
-    let form = new FormData()
-    form.append("workerId", this.userId);
+    if (DEBUG) {
+      callback("success", [
+        {
+          task_name: "Fix Countertop at Lokegaonkar's",
+          task: 1,
+          location: "1111 E Apache Blvd, Apt 140",
+          scheduled_at: "2020-05-10 11:00",
+          due_at: "2020-05-10 21:30"
+        }
+      ])
+    } else {
+      let request = new XMLHttpRequest("POST");
+      let form = new FormData()
+      form.append("workerId", this.userId);
 
-    request.onload = function(req) {
-      if (req.status == 200) {
-        let tasks = JSON.parse(req.responseText);
-        callback("success", tasks);
-      } else {
-        callback("fail", null)
+      request.onload = function(req) {
+        if (req.status == 200) {
+          let tasks = JSON.parse(req.responseText);
+          callback("success", tasks);
+        } else {
+          callback("fail", null)
+        }
       }
+      request.onload = request.onload.bind(this, request);
+      request.open("POST", this.APIURL+this.APIENDPOINTS.TASKS);
+      request.send(form);
     }
-    request.onload = request.onload.bind(this, request);
-    request.open("POST", this.APIURL+this.APIENDPOINTS.TASKS);
-    request.send(form);
   }
 
   getTaskdetails = (callback, taskId) => {
-    let request = new XMLHttpRequest("POST");
-    let form = new FormData()
-    form.append("workerId", this.userId);
-    form.append("taskId", taskId);
+    if (DEBUG) {
+      callback("success", {
+        task_id: 1,
+        subTasks: [
+          {
+            task_name: "Fix cracks in Marbles",
+            location: "Kitchen",
+            scheduled_at: "2020-05-10 12:00",
+            due_at: "2020-05-10 14:00"
+          },
+          {
+            task_name: "Repaint walls above the stove.",
+            location: "Kitchen",
+            scheduled_at: "2020-05-10 15:00",
+            due_at: "2020-05-10 21:30"
+          }
+        ]
+      })
+    } else {
+      let request = new XMLHttpRequest("POST");
+      let form = new FormData()
+      form.append("workerId", this.userId);
+      form.append("taskId", taskId);
 
-    request.onload = function(req) {
-      if (req.status == 200) {
-        let taskdetails = JSON.parse(req.responseText);
-        callback("success", taskdetails);
-      } else {
-        callback("fail", null)
+      request.onload = function(req) {
+        if (req.status == 200) {
+          let taskdetails = JSON.parse(req.responseText);
+          callback("success", taskdetails);
+        } else {
+          callback("fail", null)
+        }
       }
+      request.onload = request.onload.bind(this, request);
+      request.open("POST", this.APIURL+this.APIENDPOINTS.TASKDETAIL);
+      request.send(form);
     }
-    request.onload = request.onload.bind(this, request);
-    request.open("POST", this.APIURL+this.APIENDPOINTS.TASKDETAIL);
-    request.send(form);
   }
 }
 
